@@ -23,7 +23,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bootloader.h"
+#include "boot_comm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,7 +67,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	Bootloader_StartupCheck();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -87,7 +88,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USB_DEVICE_Init();
+  if (Bootloader_ShouldStayInBootloader())
+  {
+    Bootloader_ClearRequestFlagIfNeeded();
+    Bootloader_StartUsb();
+    BootComm_Init();
+  }
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -97,7 +103,11 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    Bootloader_HandleTasks();
+    if (Bootloader_ShouldStayInBootloader())
+    {
+      BootComm_Task();
+    }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

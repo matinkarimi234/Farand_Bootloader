@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "boot_comm.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,7 +115,6 @@ uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
 /* USER CODE BEGIN EXPORTED_VARIABLES */
-extern void Service_Input_Commands(uint8_t* Rx_Buffer);
 /* USER CODE END EXPORTED_VARIABLES */
 
 /**
@@ -133,13 +132,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length);
 static int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t *Len);
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
-void Code_0x1A(uint8_t* Buf, uint32_t Len);
-void Send_Via_USB(uint8_t* Buf, uint32_t Len);
-void Farand_USB_Tx(uint8_t* Buf, uint32_t Len);
 
-uint8_t blockPartCounter = 0;
-uint8_t block512[512];
-uint8_t usb_connection_state = 0;
 
 /* USER CODE END PRIVATE_FUNCTIONS_DECLARATION */
 
@@ -272,6 +265,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
+	BootComm_OnPacketReceived(Buf, *Len);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
   return (USBD_OK);
@@ -304,60 +298,7 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
-void Farand_USB_Tx (uint8_t* Buf, uint32_t Len)
-{	
-	uint16_t i = 0;
-	
-	for(i = 0 ; i < Len ; i++)
-	{
-		UserTxBufferFS[i] = Buf[i];
-	}
-	
-	USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, Len);	
-	USBD_CDC_TransmitPacket(&hUsbDeviceFS);			
-}
-void Send_Via_USB(uint8_t* Buf, uint32_t Len)
-{
-	Code_0x1A(Buf, Len);		
-	Farand_USB_Tx(Buf, Len);
-}
-void Code_0x1A(uint8_t* Buf, uint32_t Len)
-{
-	uint16_t  Code_Byte = 0;
-	uint16_t  codeIndex = 0;
-	uint16_t n = 0;
-	uint16_t loopCount = Len/8;
-	
-	
-// 		This coding sets a Code Byte in the form abc0 defg with the following dataPack sequence
-//		CODE_0_6	| code_byte6	| code_byte5	| code_byte4	|	0	| code_byte3 |	code_byte2 |	code_byte1 |	code_byte0		0x1A never happens									
-//		byte0										
-//		byte1										
-//		byte2										
-//		byte3										
-//		byte4										
-//		byte5										
-//		byte6	
-	
-	
-	// Code 0x1A for normal command data (8 bytes) -----------------------------------------------------------------------------
-	for( n = 0; n < loopCount ; n++)
-	{
-		Buf[8 * n] = 0;
-		for(codeIndex = 0 ; codeIndex < 8; codeIndex++)
-		{
-			if(Buf[8 * n + codeIndex + 1] == 0x1A)
-			{
-				Buf[8 * n] |= 0x01 << codeIndex;
-				Buf[8 * n + codeIndex + 1] = 0xA1; //  this is replaced to 0x1A to help finding this code
-			}
-		}
 
-		//Shift high nibble of code byte one bit to left to clear bit position 4 to 0, this avoids occurence of 0x1A in code byte itself
-		Code_Byte = (0xF0 & Buf[ 8 * n]) << 1;
-		Buf[8 * n] = (0x0F & Buf[8 * n]) | Code_Byte;
-	}
-}
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**

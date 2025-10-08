@@ -10,6 +10,7 @@
       <TargetName>Bootloader</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -411,6 +412,26 @@
               <FileName>stm32f1xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f1xx_hal_msp.c</FilePath>
+            </File>
+            <File>
+              <FileName>boot_comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\boot_comm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bootloader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\bootloader.c</FilePath>
+            </File>
+            <File>
+              <FileName>boot_comm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\boot_comm.h</FilePath>
+            </File>
+            <File>
+              <FileName>bootloader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\bootloader.h</FilePath>
             </File>
           </Files>
         </Group>

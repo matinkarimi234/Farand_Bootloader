@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -19,7 +19,6 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-
 #ifndef __USBD_CDC_IF_H__
 #define __USBD_CDC_IF_H__
 
@@ -31,6 +30,7 @@
 #include "usbd_cdc.h"
 
 /* USER CODE BEGIN INCLUDE */
+extern uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 
 /* USER CODE END INCLUDE */
 
@@ -49,8 +49,8 @@
   * @{
   */
 /* Define size for the receive and transmit buffer over CDC */
-#define APP_RX_DATA_SIZE  BOOT_COMM_FRAME_LENGTH
-#define APP_TX_DATA_SIZE  BOOT_COMM_FRAME_LENGTH
+#define APP_RX_DATA_SIZE  1024
+#define APP_TX_DATA_SIZE  1024
 /* USER CODE BEGIN EXPORTED_DEFINES */
 
 /* USER CODE END EXPORTED_DEFINES */

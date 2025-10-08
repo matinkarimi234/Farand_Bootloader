@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2025 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -66,7 +66,7 @@
 #define USBD_LANGID_STRING     1033
 #define USBD_MANUFACTURER_STRING     "STMicroelectronics"
 #define USBD_PID_FS     22336
-#define USBD_PRODUCT_STRING_FS     "Farand Bootloader"
+#define USBD_PRODUCT_STRING_FS     "Farand CNC Port"
 #define USBD_CONFIGURATION_STRING_FS     "CDC Config"
 #define USBD_INTERFACE_STRING_FS     "CDC Interface"
 
@@ -339,10 +339,6 @@ static void Get_SerialNum(void)
   uint32_t deviceserial0;
   uint32_t deviceserial1;
   uint32_t deviceserial2;
-
-  deviceserial0 = *(uint32_t *) DEVICE_ID1;
-  deviceserial1 = *(uint32_t *) DEVICE_ID2;
-  deviceserial2 = *(uint32_t *) DEVICE_ID3;
 
   deviceserial0 += deviceserial2;
 

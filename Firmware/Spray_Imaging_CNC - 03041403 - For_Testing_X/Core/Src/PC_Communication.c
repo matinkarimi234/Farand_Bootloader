@@ -1,8 +1,18 @@
 #include "main.h"
+#include "stm32f1xx_hal_flash.h"
+#include "stm32f1xx_hal_flash_ex.h"
+
+#define PC_CMD_ENTER_BOOTLOADER       0xF0U
+#define BOOT_FLAG_ADDRESS             0x0800FC00U
+#define BOOT_FLAG_REQUEST_VALUE       0x00000001U
+
+
 uint32_t com_Counter = 0;
 uint8_t command_Bytes;
 
 void Service_Input_Commands(uint8_t* command_Bytes);
+static HAL_StatusTypeDef Bootloader_SetRequestFlag(void);
+static void Bootloader_RequestFromApplication(void);
 
 void Code_0x1A(uint8_t* Buf, uint32_t Len);
 
@@ -183,6 +193,11 @@ void Service_Input_Commands(uint8_t* command_Bytes)
 
 				Alarm(LONG_BEEP, 1 , 32, 1);
 				break;	
+			
+			case PC_CMD_ENTER_BOOTLOADER: // Enter bootloader
+				Bootloader_RequestFromApplication();
+				break;
+
 
 
 
@@ -306,6 +321,41 @@ void Clear_All_Buffers()
 		tx_buff[i] = 0x00;
 	}
 }
+
+static HAL_StatusTypeDef Bootloader_SetRequestFlag(void)
+{
+	FLASH_EraseInitTypeDef eraseConfig = {0};
+	uint32_t pageError = 0U;
+	HAL_StatusTypeDef status;
+
+	HAL_FLASH_Unlock();
+
+	eraseConfig.TypeErase = FLASH_TYPEERASE_PAGES;
+	eraseConfig.PageAddress = BOOT_FLAG_ADDRESS;
+	eraseConfig.NbPages = 1U;
+
+	status = HAL_FLASHEx_Erase(&eraseConfig, &pageError);
+
+	if(status == HAL_OK)
+	{
+		status = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, BOOT_FLAG_ADDRESS, BOOT_FLAG_REQUEST_VALUE);
+	}
+
+	HAL_FLASH_Lock();
+
+	return status;
+}
+
+static void Bootloader_RequestFromApplication(void)
+{
+	if(Bootloader_SetRequestFlag() == HAL_OK)
+	{
+		__disable_irq();
+		NVIC_SystemReset();
+	}
+}
+
+
 	
 void Code_0x1A(uint8_t* Buf, uint32_t Len)
 {

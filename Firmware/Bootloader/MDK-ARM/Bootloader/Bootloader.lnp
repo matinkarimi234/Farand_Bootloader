@@ -1,11 +1,11 @@
 --cpu Cortex-M3
 "bootloader\startup_stm32f103xb.o"
+"bootloader\boot_comm.o"
+"bootloader\bootloader.o"
 "bootloader\main.o"
 "bootloader\gpio.o"
 "bootloader\stm32f1xx_it.o"
 "bootloader\stm32f1xx_hal_msp.o"
-"bootloader\boot_comm.o"
-"bootloader\bootloader.o"
 "bootloader\usb_device.o"
 "bootloader\usbd_desc.o"
 "bootloader\usbd_cdc_if.o"

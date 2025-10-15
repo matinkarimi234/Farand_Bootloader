@@ -36,6 +36,7 @@ void Bootloader_StartupCheck(void)
     }
     else
     {
+			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
       s_stayInBootloader = true;
     }
   }

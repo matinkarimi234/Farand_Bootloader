@@ -88,12 +88,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  if (Bootloader_ShouldStayInBootloader())
-  {
-    Bootloader_ClearRequestFlagIfNeeded();
-    Bootloader_StartUsb();
-    BootComm_Init();
-  }
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -103,11 +98,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    Bootloader_HandleTasks();
-    if (Bootloader_ShouldStayInBootloader())
-    {
-      BootComm_Task();
-    }
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

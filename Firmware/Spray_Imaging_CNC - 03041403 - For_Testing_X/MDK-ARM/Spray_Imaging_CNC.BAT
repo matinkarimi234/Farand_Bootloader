@@ -1,0 +1,46 @@
+SET PATH=C:\Keil_v5\ARM\ARMCC\Bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\WireSock VPN Client\bin\;C:\Program Files\PuTTY\;C:\Program Files\Cloudflare\Cloudflare WARP\;C:\gstreamer\1.0\msvc_x86_64\bin;C:\Program Files\MATLAB\R2024b\runtime\win64;C:\Program Files\MATLAB\R2024b\bin;C:\Program Files\MSC.Software\Adams\2020_711253\bin;C:\Users\Matin\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\Matin\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Matin\AppData\Local\Programs\Python\Python39\;C:\Users\Matin\AppData\Local\Microsoft\WindowsApps;C:\Users\Matin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Matin\.dotnet\tools;C:\Users\Matin\AppData\Roaming\npm;C:\Users\Matin\AppData\Local\Pandoc\;C:\gstreamer\1.0\msvc_x86_64\bin;
+SET ARMCC5_ASMOPT=--diag_suppress=9931
+SET ARMCC5_CCOPT=--diag_suppress=9931
+SET ARMCC5_LINKOPT=--diag_suppress=9931
+SET CPU_TYPE=STM32F103C8
+SET CPU_VENDOR=STMicroelectronics
+SET UV2_TARGET=Spray_Imaging_CNC
+SET CPU_CLOCK=0x007A1200
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmAsm" --Via "spray_imaging_cnc\startup_stm32f103xb._ia"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\pc_communication.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\motor_controller.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\alarm.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\main.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\gpio.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\tim.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usart.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_it.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_msp.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\system_stm32f1xx.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_gpio_ex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_pcd.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_pcd_ex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_ll_usb.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_rcc.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_rcc_ex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_gpio.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_dma.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_cortex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_pwr.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_flash.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_flash_ex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_exti.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_tim.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_tim_ex.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\stm32f1xx_hal_uart.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usb_device.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_desc.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_cdc_if.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_conf.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_core.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_ctlreq.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_ioreq.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via "spray_imaging_cnc\usbd_cdc.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmLink" --Via "Spray_Imaging_CNC\Spray_Imaging_CNC.lnp"
+"C:\Keil_v5\ARM\ARMCC\Bin\fromelf.exe" "Spray_Imaging_CNC\Spray_Imaging_CNC.axf" --i32combined --output "Spray_Imaging_CNC\Spray_Imaging_CNC.hex"

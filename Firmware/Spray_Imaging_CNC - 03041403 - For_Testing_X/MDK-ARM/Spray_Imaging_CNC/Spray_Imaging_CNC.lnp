@@ -18,7 +18,7 @@
 "spray_imaging_cnc\stm32f1xx_hal_rcc.o"
 "spray_imaging_cnc\stm32f1xx_hal_rcc_ex.o"
 "spray_imaging_cnc\stm32f1xx_hal_gpio.o"
-"spray_imaging_cnc\stm32f1xx_hal_cortex.o"
+"spray_imaging_cnc\stm32f1xx_hal_dma.o"
 "spray_imaging_cnc\stm32f1xx_hal_cortex.o"
 "spray_imaging_cnc\stm32f1xx_hal_pwr.o"
 "spray_imaging_cnc\stm32f1xx_hal_flash.o"

@@ -48,17 +48,25 @@ namespace Farand_Bootloader_App
         private void Initialize_Virtual_COM_Port()
         {
             vcp.Is_Minimised = true;
-            vcp.Rx_Byte_Count = 64;
+
+            vcp.Rx_Byte_Count = 56;
             vcp.Baud_Rate = 9600;
             vcp.Communication_Response = 0x55;
-            vcp.Communication_Response_Byte_Index = 2;
+            vcp.Communication_Response_Byte_Index = 51;
             vcp.Start_Communication_Byte = 0x55;
-            vcp.Start_Communication_Byte_Index = 1;
-            vcp.Received_Data_Ready += Vcp_Received_Data_Ready1;
-            vcp.Normal_Operation_Starts += Vcp_Normal_Operation_Starts;
+            vcp.Start_Communication_Byte_Index = 27;
+
             vcp.Connection_Failed += Vcp_Connection_Failed;
             vcp.Connection_Ready += Vcp_Connection_Ready;
 
+            vcp.Received_Data_Ready += Vcp_Received_Data_Ready;
+            vcp.Normal_Operation_Starts += Vcp_Normal_Operation_Starts;
+            //vcp.Start_Connection();
+        }
+
+        private void Vcp_Received_Data_Ready(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Vcp_Connection_Ready(object sender, EventArgs e)
@@ -84,6 +92,7 @@ namespace Farand_Bootloader_App
         private void Form1_Load(object sender, EventArgs e)
         {
             Initialize_Virtual_COM_Port();
+            vcp.Start_VCP_Connection = true;
         }
 
         private string Convert_To_Hex_Format(int n)
@@ -98,12 +107,16 @@ namespace Farand_Bootloader_App
             return s;
         }
 
-        public void Send_Data()
+        private void Clear_All_Buffers()
         {
-            //try
-            //{   
+            for (int i = 0; i < command_Bytes.Length; i++)
+            {
+                command_Bytes[i] = 0;
+            }
+        }
 
-
+        private void timer_Tx_Tick(object sender, EventArgs e)
+        {
             if (Tx_Data_Ready == true)
             {
                 Tx_Data_Ready = false;
@@ -111,29 +124,38 @@ namespace Farand_Bootloader_App
             else
             {
                 Clear_All_Buffers();
+
+                command_Bytes[0] = 0x01;
             }
+
+            command_Bytes[29] = 0xAA;
+            command_Bytes[30] = 0xAA;
+            command_Bytes[31] = Calculate_CheckSum(command_Bytes);
 
             if (close_Serialport == false)
             {
                 vcp.Send_Data(command_Bytes);
             }
-
-
-
-            //}
-            //catch (Exception ex)
-            //{
-            // Application.Exit(); 
-            //MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
         }
 
-        private void Clear_All_Buffers()
+
+        private byte Calculate_CheckSum(byte[] data_Bytes)
         {
-            for (int i = 0; i < command_Bytes.Length; i++)
+            int cs = 0;
+            for (int i = 0; i < data_Bytes.Length - 1; i++)
             {
-                command_Bytes[i] = 0;
+                cs = cs + data_Bytes[i];
             }
+            return (byte)cs;
+        }
+
+        private void button_Firmware_Upgrade_Click(object sender, EventArgs e)
+        {
+            Clear_All_Buffers();
+
+            command_Bytes[0] = (byte)0xF0;
+
+            Tx_Data_Ready = true;
         }
     }
 }

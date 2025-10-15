@@ -27,7 +27,22 @@ Project File Date:  10/15/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Bootloader'
-"Bootloader\Bootloader.axf" - 0 Error(s), 0 Warning(s).
+compiling bootloader.c...
+../Core/Inc/bootloader.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif /* BOOTLOADER_H */
+..\Core\Src\bootloader.c(178): warning:  #1-D: last line of file ends without a newline
+  }
+..\Core\Src\bootloader.c: 2 warnings, 0 errors
+compiling main.c...
+../Core/Inc/bootloader.h(33): warning:  #1-D: last line of file ends without a newline
+  #endif /* BOOTLOADER_H */
+../Core/Inc/boot_comm.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif /* BOOT_COMM_H */
+../Core/Src/main.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=14168 RO-data=304 RW-data=400 ZI-data=4344  
+FromELF: creating hex file...
+"Bootloader\Bootloader.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +66,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.4.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

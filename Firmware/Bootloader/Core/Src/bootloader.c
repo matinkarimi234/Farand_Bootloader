@@ -155,6 +155,8 @@ static bool Bootloader_IsApplicationValid(void)
 
 static void Bootloader_JumpToApplication(void)
 {
+
+	
   uint32_t appStackPointer = *(__IO uint32_t *)APP_START_ADDRESS;
   uint32_t appResetHandler = *(__IO uint32_t *)(APP_START_ADDRESS + 4U);
   ApplicationEntryPoint appEntry = (ApplicationEntryPoint)appResetHandler;
